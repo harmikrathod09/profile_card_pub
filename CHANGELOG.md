@@ -1,3 +1,1 @@
-## 0.0.1 create intial pub
-
-* TODO: Describe initial release.
+## 0.0.1 - Initial release
