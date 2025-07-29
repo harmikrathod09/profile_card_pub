@@ -1,15 +1,16 @@
 # Profile Card Pub
 
-A customizable Flutter widget for displaying user profile information in an elegant card format.
+A professional Flutter widget for displaying user profile information in a clean, modern card format with customizable colors.
 
 ## Features
 
-- **Customizable Design**: Adjust colors, padding, borders, and shadows
-- **Avatar Support**: Display profile images or fallback to default icon
-- **Contact Information**: Show email, phone, and website with icons
+- **Professional Design**: Clean, modern single-style card layout
+- **Customizable Colors**: Set your own background and text colors
+- **Avatar Support**: Display profile images or elegant default icon
+- **Contact Information**: Show email, phone, and website with professional icons
 - **Responsive Layout**: Adapts to different screen sizes
 - **Theme Integration**: Automatically uses your app's theme colors
-- **Flexible Sizing**: Customizable width and height
+- **Consistent Styling**: Professional appearance with subtle shadows and borders
 
 ## Getting started
 
@@ -32,14 +33,14 @@ flutter pub get
 ```dart
 import 'package:profile_card_pub/profile_card_pub.dart';
 
-// Simple profile card
+// Simple profile card with default styling
 ProfileCardWidget(
   name: "John Doe",
   title: "Software Developer",
 )
 ```
 
-### Advanced Usage
+### Custom Colors
 
 ```dart
 ProfileCardWidget(
@@ -51,26 +52,18 @@ ProfileCardWidget(
   website: "https://janesmith.com",
   backgroundColor: Colors.blue[50],
   textColor: Colors.blue[900],
-  width: 300,
-  padding: EdgeInsets.all(20),
-  borderRadius: BorderRadius.circular(16),
 )
 ```
 
-### Custom Styling
+### Dark Theme Example
 
 ```dart
 ProfileCardWidget(
   name: "Alex Johnson",
   title: "Product Manager",
   email: "alex@company.com",
-  backgroundColor: Colors.grey[100],
-  textColor: Colors.grey[800],
-  shadow: BoxShadow(
-    color: Colors.black.withOpacity(0.2),
-    blurRadius: 12,
-    offset: Offset(0, 4),
-  ),
+  backgroundColor: Colors.grey[900],
+  textColor: Colors.white,
 )
 ```
 
@@ -84,16 +77,22 @@ ProfileCardWidget(
 | `email` | String? | No | Email address |
 | `phone` | String? | No | Phone number |
 | `website` | String? | No | Website URL |
-| `backgroundColor` | Color? | No | Card background color |
-| `textColor` | Color? | No | Text color |
-| `width` | double? | No | Card width |
-| `height` | double? | No | Card height |
-| `padding` | EdgeInsetsGeometry? | No | Internal padding |
-| `borderRadius` | BorderRadius? | No | Card corner radius |
-| `shadow` | BoxShadow? | No | Card shadow |
+| `backgroundColor` | Color? | No | Card background color (defaults to theme) |
+| `textColor` | Color? | No | Primary text color (defaults to theme) |
+| `width` | double? | No | Card width (defaults to 320) |
+| `height` | double? | No | Card height (auto-sized by default) |
+
+## Design Features
+
+- **Professional Typography**: Optimized font sizes and weights
+- **Subtle Shadows**: Elegant drop shadow for depth
+- **Rounded Corners**: Modern 16px border radius
+- **Avatar Border**: Subtle border around profile images
+- **Contact Section**: Highlighted contact information area
+- **Consistent Spacing**: Professional padding and margins
 
 ## Additional information
 
-This package is designed for demo purposes and provides a simple, reusable profile card widget for Flutter applications. The widget automatically adapts to your app's theme and provides sensible defaults while allowing extensive customization.
+This package provides a professional, single-style profile card widget designed for modern Flutter applications. The widget maintains a consistent, elegant appearance while allowing customization of background and text colors to match your app's design.
 
 For issues, feature requests, or contributions, please visit the package repository.

@@ -11,9 +11,6 @@ class ProfileCardWidget extends StatelessWidget {
   final Color? textColor;
   final double? width;
   final double? height;
-  final EdgeInsetsGeometry? padding;
-  final BorderRadius? borderRadius;
-  final BoxShadow? shadow;
 
   const ProfileCardWidget({
     super.key,
@@ -27,117 +24,165 @@ class ProfileCardWidget extends StatelessWidget {
     this.textColor,
     this.width,
     this.height,
-    this.padding,
-    this.borderRadius,
-    this.shadow,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final defaultBackgroundColor = backgroundColor ?? theme.cardColor;
-    final defaultTextColor = textColor ?? theme.textTheme.bodyLarge?.color ?? Colors.black;
-    final defaultPadding = padding ?? const EdgeInsets.all(16.0);
-    final defaultBorderRadius = borderRadius ?? BorderRadius.circular(12.0);
-    final defaultShadow = shadow ?? BoxShadow(
-      color: Colors.black.withOpacity(0.1),
-      blurRadius: 8,
-      offset: const Offset(0, 2),
-    );
+    final defaultTextColor = textColor ?? theme.textTheme.bodyLarge?.color ?? Colors.black87;
+    
+    // Calculate text opacity for different elements
+    final primaryTextColor = defaultTextColor;
+    final secondaryTextColor = defaultTextColor.withOpacity(0.7);
+    final tertiaryTextColor = defaultTextColor.withOpacity(0.6);
 
     return Container(
-      width: width,
+      width: width ?? 320,
       height: height,
-      padding: defaultPadding,
       decoration: BoxDecoration(
         color: defaultBackgroundColor,
-        borderRadius: defaultBorderRadius,
-        boxShadow: [defaultShadow],
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Avatar
-          if (avatarUrl != null)
-            CircleAvatar(
-              radius: 50,
-              backgroundImage: NetworkImage(avatarUrl!),
-              onBackgroundImageError: (exception, stackTrace) {
-                // Handle image loading error
-              },
-            )
-          else
-            CircleAvatar(
-              radius: 50,
-              backgroundColor: defaultTextColor.withOpacity(0.1),
-              child: Icon(
-                Icons.person,
-                size: 50,
-                color: defaultTextColor,
-              ),
-            ),
-          
-          const SizedBox(height: 16),
-          
-          // Name
-          Text(
-            name,
-            style: theme.textTheme.headlineSmall?.copyWith(
-              color: defaultTextColor,
-              fontWeight: FontWeight.bold,
-            ),
-            textAlign: TextAlign.center,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+            spreadRadius: 0,
           ),
-          
-          const SizedBox(height: 8),
-          
-          // Title
-          Text(
-            title,
-            style: theme.textTheme.bodyLarge?.copyWith(
-              color: defaultTextColor.withOpacity(0.7),
-            ),
-            textAlign: TextAlign.center,
-          ),
-          
-          if (email != null || phone != null || website != null) ...[
-            const SizedBox(height: 16),
-            const Divider(),
-            const SizedBox(height: 16),
-          ],
-          
-          // Contact Information
-          if (email != null)
-            _buildContactItem(Icons.email, email!, defaultTextColor),
-          
-          if (phone != null)
-            _buildContactItem(Icons.phone, phone!, defaultTextColor),
-          
-          if (website != null)
-            _buildContactItem(Icons.language, website!, defaultTextColor),
         ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Avatar Section
+            Container(
+              width: 80,
+              height: 80,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: primaryTextColor.withOpacity(0.1),
+                  width: 3,
+                ),
+              ),
+              child: avatarUrl != null
+                  ? ClipOval(
+                      child: Image.network(
+                        avatarUrl!,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return _buildDefaultAvatar(primaryTextColor);
+                        },
+                      ),
+                    )
+                  : _buildDefaultAvatar(primaryTextColor),
+            ),
+            
+            const SizedBox(height: 20),
+            
+            // Name
+            Text(
+              name,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
+                color: primaryTextColor,
+                letterSpacing: -0.5,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            
+            const SizedBox(height: 8),
+            
+            // Title
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                color: secondaryTextColor,
+                letterSpacing: 0.2,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            
+            // Contact Information Section
+            if (email != null || phone != null || website != null) ...[
+              const SizedBox(height: 24),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                decoration: BoxDecoration(
+                  color: primaryTextColor.withOpacity(0.03),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  children: [
+                    if (email != null) _buildContactItem(
+                      Icons.email_outlined,
+                      email!,
+                      tertiaryTextColor,
+                      primaryTextColor,
+                    ),
+                    if (phone != null) _buildContactItem(
+                      Icons.phone_outlined,
+                      phone!,
+                      tertiaryTextColor,
+                      primaryTextColor,
+                    ),
+                    if (website != null) _buildContactItem(
+                      Icons.language_outlined,
+                      website!,
+                      tertiaryTextColor,
+                      primaryTextColor,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildContactItem(IconData icon, String text, Color textColor) {
+  Widget _buildDefaultAvatar(Color textColor) {
+    return Container(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: textColor.withOpacity(0.1),
+      ),
+      child: Icon(
+        Icons.person,
+        size: 40,
+        color: textColor.withOpacity(0.7),
+      ),
+    );
+  }
+
+  Widget _buildContactItem(IconData icon, String text, Color textColor, Color iconColor) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      padding: const EdgeInsets.symmetric(vertical: 6.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
             icon,
-            size: 16,
-            color: textColor.withOpacity(0.7),
+            size: 18,
+            color: iconColor.withOpacity(0.7),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: 12),
           Flexible(
             child: Text(
               text,
               style: TextStyle(
-                color: textColor.withOpacity(0.8),
+                color: textColor,
                 fontSize: 14,
+                fontWeight: FontWeight.w400,
+                letterSpacing: 0.1,
               ),
               textAlign: TextAlign.center,
             ),
