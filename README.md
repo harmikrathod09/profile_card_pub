@@ -18,7 +18,7 @@ Add this package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  profile_card_pub: ^0.1.0
+  profile_card_pub: ^0.1.2
 ```
 
 Then run:
