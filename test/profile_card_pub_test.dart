@@ -3,12 +3,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:profile_card_pub/profile_card_pub.dart';
 
 void main() {
-  group('ProfileCard Widget Tests', () {
+  group('ProfileCardWidget Widget Tests', () {
     testWidgets('renders basic profile card with name and title', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ProfileCard(
+            body: ProfileCardWidget(
               name: 'John Doe',
               title: 'Software Developer',
             ),
@@ -24,7 +24,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ProfileCard(
+            body: ProfileCardWidget(
               name: 'Jane Smith',
               title: 'UI/UX Designer',
               email: 'jane@example.com',
@@ -46,7 +46,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ProfileCard(
+            body: ProfileCardWidget(
               name: 'Alex Johnson',
               title: 'Product Manager',
             ),
@@ -61,7 +61,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ProfileCard(
+            body: ProfileCardWidget(
               name: 'Test User',
               title: 'Test Title',
               backgroundColor: Colors.red,

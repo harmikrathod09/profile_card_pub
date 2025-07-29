@@ -17,7 +17,7 @@ Add this package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  profile_card_pub: ^0.0.1
+  profile_card_pub: ^0.1.0
 ```
 
 Then run:
@@ -33,7 +33,7 @@ flutter pub get
 import 'package:profile_card_pub/profile_card_pub.dart';
 
 // Simple profile card
-ProfileCard(
+ProfileCardWidget(
   name: "John Doe",
   title: "Software Developer",
 )
@@ -42,7 +42,7 @@ ProfileCard(
 ### Advanced Usage
 
 ```dart
-ProfileCard(
+ProfileCardWidget(
   name: "Jane Smith",
   title: "UI/UX Designer",
   avatarUrl: "https://example.com/avatar.jpg",
@@ -60,7 +60,7 @@ ProfileCard(
 ### Custom Styling
 
 ```dart
-ProfileCard(
+ProfileCardWidget(
   name: "Alex Johnson",
   title: "Product Manager",
   email: "alex@company.com",

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ProfileCard extends StatelessWidget {
+class ProfileCardWidget extends StatelessWidget {
   final String name;
   final String title;
   final String? avatarUrl;
@@ -15,7 +15,7 @@ class ProfileCard extends StatelessWidget {
   final BorderRadius? borderRadius;
   final BoxShadow? shadow;
 
-  const ProfileCard({
+  const ProfileCardWidget({
     super.key,
     required this.name,
     required this.title,
